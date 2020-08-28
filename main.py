@@ -7,32 +7,36 @@ menu_def = [
     ['&Help', '&About...']
 ]
 
-atk_frame = sg.Frame('Attacker', [[
+atk_frame = sg.Frame('Attacker', [
+    [sg.Text("Base Attack", font="Any 12")],
+    [sg.InputText(size=(20, None), font="Any 12")]
+], font="Any 14")
 
-]], font="Any 12")
+spd_frame = sg.Frame('Attack Speed', [
+    [sg.Text("Base Interval", font="Any 12")],
+    [sg.InputText(size=(20, None), font="Any 12")]
+], font="Any 14")
 
-spd_frame = sg.Frame('Attack Speed', [[
+def_frame = sg.Frame('Defender', [
+    [sg.Text("Base Defense", font="Any 12")],
+    [sg.InputText(size=(20, None), font="Any 12")]
+], font="Any 14")
 
-]], font="Any 12")
-
-def_frame = sg.Frame('Defender', [[
-
-]], font="Any 12")
-
-mov_frame = sg.Frame('Defender Movement', [[
-
-]], font="Any 12")
+mov_frame = sg.Frame('Defender Movement', [
+    [sg.Text("Movement Speed", font="Any 12")],
+    [sg.InputText(size=(20, None), font="Any 12")]
+], font="Any 14")
 
 input_layout = [
-    sg.Column([[atk_frame]], expand_x=True, expand_y=True),
-    sg.Column([[spd_frame]], expand_x=True, expand_y=True),
-    sg.Column([[def_frame]], expand_x=True, expand_y=True),
-    sg.Column([[mov_frame]], expand_x=True, expand_y=True)
+    sg.Column([[atk_frame]], expand_y=True),
+    sg.Column([[spd_frame]], expand_y=True),
+    sg.Column([[def_frame]], expand_y=True),
+    sg.Column([[mov_frame]], expand_y=True)
 ]
 
 dps_frame = sg.Frame("Damage Breakdown", [[
 
-]], font="Any 12")
+]], font="Any 14")
 
 output_layout = [
     sg.Column([[dps_frame]], expand_x=True, expand_y=True)
@@ -45,9 +49,11 @@ layout = [
 
 frames = [atk_frame, spd_frame, def_frame, mov_frame, dps_frame]
 
-window = sg.Window('Rhodes Island Simulation Complex', layout, finalize=True, resizable=True, size=(900, 600))
+window = sg.Window('Rhodes Island Simulation Complex', layout, finalize=True)
+
 for frame in frames:
     frame.expand(expand_x=True, expand_y=True)
+
 while True:  # Event Loop
     event, values = window.read()
     print(event, values)
